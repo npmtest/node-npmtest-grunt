@@ -1,4 +1,6 @@
-<html lang="en"><head>
+<!doctype html>
+<html lang="en">
+<head>
     <title>Code coverage report for node-npmtest-grunt/grunt/lib/grunt/template.js</title>
     <meta charset="utf-8">
     <style>
@@ -208,11 +210,11 @@
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-grunt/grunt/lib/grunt/</a> » template.js</div>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-grunt/grunt/lib/grunt/</a> &#187; template.js</div>
 </div>
 <div class="body">
 <pre><table class="coverage">
-<tbody><tr><td class="line-count">1
+<tr><td class="line-count">1
 2
 3
 4
@@ -397,8 +399,8 @@ var template = module.exports = {};
 template.date = require('dateformat');
 &nbsp;
 // Format today's date.
-template.today = <span class="fstat-no" title="function not covered">function(format) {</span>
-<span class="cstat-no" title="statement not covered">  return template.date(new Date(), format);</span>
+template.today = <span class="fstat-no" title="function not covered" >function(format) {</span>
+<span class="cstat-no" title="statement not covered" >  return template.date(new Date(), format);</span>
 };
 &nbsp;
 // Template delimiters.
@@ -426,59 +428,58 @@ template.addDelimiters = function(name, opener, closer) {
 template.addDelimiters('config', '&lt;%', '%&gt;');
 &nbsp;
 // Set Lo-Dash template delimiters.
-template.setDelimiters = <span class="fstat-no" title="function not covered">function(name) {</span>
+template.setDelimiters = <span class="fstat-no" title="function not covered" >function(name) {</span>
   // Get the appropriate delimiters.
-<span class="cstat-no" title="statement not covered">  var delimiters = allDelimiters[name in allDelimiters ? name : 'config'];</span>
+<span class="cstat-no" title="statement not covered" >  var delimiters = allDelimiters[name in allDelimiters ? name : 'config'];</span>
   // Tell Lo-Dash which delimiters to use.
-<span class="cstat-no" title="statement not covered">  grunt.util._.extend(grunt.util._.templateSettings, delimiters.lodash);</span>
+<span class="cstat-no" title="statement not covered" >  grunt.util._.extend(grunt.util._.templateSettings, delimiters.lodash);</span>
   // Return the delimiters.
-<span class="cstat-no" title="statement not covered">  return delimiters;</span>
+<span class="cstat-no" title="statement not covered" >  return delimiters;</span>
 };
 &nbsp;
 // Process template + data with Lo-Dash.
-template.process = <span class="fstat-no" title="function not covered">function(tmpl, options) {</span>
-<span class="cstat-no" title="statement not covered">  if (!options) { <span class="cstat-no" title="statement not covered">options = {}; </span>}</span>
+template.process = <span class="fstat-no" title="function not covered" >function(tmpl, options) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!options) { <span class="cstat-no" title="statement not covered" >options = {}; </span>}</span>
   // Set delimiters, and get a opening match character.
-<span class="cstat-no" title="statement not covered">  var delimiters = template.setDelimiters(options.delimiters);</span>
+<span class="cstat-no" title="statement not covered" >  var delimiters = template.setDelimiters(options.delimiters);</span>
   // Clone data, initializing to config data or empty object if omitted.
-<span class="cstat-no" title="statement not covered">  var data = Object.create(options.data || grunt.config.data || {});</span>
+<span class="cstat-no" title="statement not covered" >  var data = Object.create(options.data || grunt.config.data || {});</span>
   // Expose grunt so that grunt utilities can be accessed, but only if it
   // doesn't conflict with an existing .grunt property.
-<span class="cstat-no" title="statement not covered">  if (!('grunt' in data)) { <span class="cstat-no" title="statement not covered">data.grunt = grunt; </span>}</span>
+<span class="cstat-no" title="statement not covered" >  if (!('grunt' in data)) { <span class="cstat-no" title="statement not covered" >data.grunt = grunt; </span>}</span>
   // Keep track of last change.
-<span class="cstat-no" title="statement not covered">  var last = tmpl;</span>
-<span class="cstat-no" title="statement not covered">  try {</span>
+<span class="cstat-no" title="statement not covered" >  var last = tmpl;</span>
+<span class="cstat-no" title="statement not covered" >  try {</span>
     // As long as tmpl contains template tags, render it and get the result,
     // otherwise just use the template string.
-<span class="cstat-no" title="statement not covered">    while (tmpl.indexOf(delimiters.opener) &gt;= 0) {</span>
-<span class="cstat-no" title="statement not covered">      tmpl = grunt.util._.template(tmpl, options)(data);</span>
+<span class="cstat-no" title="statement not covered" >    while (tmpl.indexOf(delimiters.opener) &gt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >      tmpl = grunt.util._.template(tmpl, options)(data);</span>
       // Abort if template didn't change - nothing left to process!
-<span class="cstat-no" title="statement not covered">      if (tmpl === last) { <span class="cstat-no" title="statement not covered">break; </span>}</span>
-<span class="cstat-no" title="statement not covered">      last = tmpl;</span>
+<span class="cstat-no" title="statement not covered" >      if (tmpl === last) { <span class="cstat-no" title="statement not covered" >break; </span>}</span>
+<span class="cstat-no" title="statement not covered" >      last = tmpl;</span>
     }
   } catch (e) {
     // In upgrading to Lo-Dash (or Underscore.js 1.3.3), \n and \r in template
     // tags now causes an exception to be thrown. Warn the user why this is
     // happening. https://github.com/documentcloud/underscore/issues/553
-<span class="cstat-no" title="statement not covered">    if (String(e) === 'SyntaxError: Unexpected token ILLEGAL' &amp;&amp; /\n|\r/.test(tmpl)) {</span>
-<span class="cstat-no" title="statement not covered">      grunt.log.errorlns('A special character was detected in this template. ' +</span>
+<span class="cstat-no" title="statement not covered" >    if (String(e) === 'SyntaxError: Unexpected token ILLEGAL' &amp;&amp; /\n|\r/.test(tmpl)) {</span>
+<span class="cstat-no" title="statement not covered" >      grunt.log.errorlns('A special character was detected in this template. ' +</span>
         'Inside template tags, the \\n and \\r special characters must be ' +
         'escaped as \\\\n and \\\\r. (grunt 0.4.0+)');
     }
     // Slightly better error message.
-<span class="cstat-no" title="statement not covered">    e.message = 'An error occurred while processing a template (' + e.message + ').';</span>
-<span class="cstat-no" title="statement not covered">    grunt.warn(e, grunt.fail.code.TEMPLATE_ERROR);</span>
+<span class="cstat-no" title="statement not covered" >    e.message = 'An error occurred while processing a template (' + e.message + ').';</span>
+<span class="cstat-no" title="statement not covered" >    grunt.warn(e, grunt.fail.code.TEMPLATE_ERROR);</span>
   }
   // Normalize linefeeds and return.
-<span class="cstat-no" title="statement not covered">  return grunt.util.normalizelf(tmpl);</span>
+<span class="cstat-no" title="statement not covered" >  return grunt.util.normalizelf(tmpl);</span>
 };
 &nbsp;
 &nbsp;</pre></td></tr>
-</tbody></table></pre>
+</table></pre>
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 03:45:12 GMT+0000 (UTC)</div>
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sat Apr 15 2017 21:06:22 GMT+0000 (UTC)</div>
 </div>
-
-
-</body></html>
+</body>
+</html>
